@@ -2,6 +2,11 @@ package com.andricohalim.suitmediatest.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.andricohalim.suitmediatest.data.UserPagingSource
 import com.andricohalim.suitmediatest.response.DataItem
 import com.andricohalim.suitmediatest.response.UserResponse
 import com.andricohalim.suitmediatest.retrofit.ApiService
@@ -12,15 +17,14 @@ class UserRepository(
     private val apiService: ApiService
 ) {
 
-    fun getUSer(): LiveData<Result<UserResponse>> =
-        liveData{
-            emit(Result.Loading)
-            try {
-                val userResponse = apiService.getUser()
-                emit(Result.Success(userResponse))
-            } catch (e: Exception){
-                e.printStackTrace()
-                emit(Result.Error("Terjadi kesalahan: ${e.message}"))
+    fun getUSer(): LiveData<PagingData<DataItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                UserPagingSource(apiService)
             }
-        }
+        ).liveData
+    }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.andricohalim.suitmediatest.adapter.UserAdapter
+import com.andricohalim.suitmediatest.data.LoadingStateAdapter
 import com.andricohalim.suitmediatest.utils.Result
 import com.andricohalim.suitmediatest.databinding.ActivityThirdScreenBinding
 import com.andricohalim.suitmediatest.response.DataItem
@@ -24,45 +25,25 @@ class ThirdScreenActivity : AppCompatActivity() {
         binding = ActivityThirdScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Third Screen"
+
+
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
 
-//        val dividerItemDecoration = DividerItemDecoration(
-//            binding.rvUser.context,
-//            layoutManager.orientation
-//        )
-//        binding.rvUser.addItemDecoration(dividerItemDecoration)
+        setupAction()
 
-
-        thirdScreenViewModel.listUser.observe(this) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-
-                is Result.Success -> {
-                    showLoading(false)
-                    setupAction(result.data.data)
-                }
-
-                is Result.Error -> {
-                    showLoading(false)
-                    binding.tvError.text = result.error
-                    binding.tvError.visibility = View.VISIBLE
-                }
-            }
-        }
     }
 
-    private fun setupAction(story: List<DataItem>) {
-        binding.apply {
-            if (story.isNotEmpty()) {
-                val adapter = UserAdapter(story)
-                binding.rvUser.adapter = adapter
-            } else {
-                rvUser.adapter = null
-                binding.tvError.visibility = View.VISIBLE
+    private fun setupAction() {
+        val adapter = UserAdapter()
+        binding.rvUser.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
             }
+        )
+        thirdScreenViewModel.listUser.observe(this) {
+            adapter.submitData(lifecycle, it)
         }
     }
 
