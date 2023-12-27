@@ -14,6 +14,7 @@ android {
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled =  true
 
         buildConfigField("String", "BASE_URL", "\"https://reqres.in/api/\"")
 
