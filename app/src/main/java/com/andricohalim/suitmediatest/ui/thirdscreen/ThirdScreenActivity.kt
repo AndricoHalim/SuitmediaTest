@@ -1,19 +1,16 @@
 package com.andricohalim.suitmediatest.ui.thirdscreen
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andricohalim.suitmediatest.R
 import com.andricohalim.suitmediatest.adapter.UserAdapter
 import com.andricohalim.suitmediatest.data.LoadingStateAdapter
 import com.andricohalim.suitmediatest.databinding.ActivityThirdScreenBinding
-import com.andricohalim.suitmediatest.ui.secondscreen.SecondScreenActivity
 import com.andricohalim.suitmediatest.utils.ViewModelFactory
 
 class ThirdScreenActivity : AppCompatActivity() {

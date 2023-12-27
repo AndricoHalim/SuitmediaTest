@@ -12,7 +12,7 @@ import com.andricohalim.suitmediatest.ui.thirdscreen.ThirdScreenActivity
 class SecondScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySecondScreenBinding
-
+    private var selectedUsername: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySecondScreenBinding.inflate(layoutInflater)
@@ -55,7 +55,8 @@ class SecondScreenActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.tvUser.text = intent.getStringExtra(USERNAME)
+        selectedUsername = intent.getStringExtra(USERNAME)
+        binding.tvUser.text = selectedUsername ?: "User"
     }
 
 
