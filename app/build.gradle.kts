@@ -70,4 +70,7 @@ dependencies {
 
     //paging
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+
+    //swipe refresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }

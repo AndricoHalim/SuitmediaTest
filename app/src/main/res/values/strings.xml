@@ -8,4 +8,7 @@
     <string name="next">NEXT</string>
     <string name="error">Error</string>
     <string name="retry">Retry</string>
+    <string name="lastname">Lastname</string>
+    <string name="email_email_com">email@email.com</string>
+    <string name="firstname">Firstname</string>
 </resources>

@@ -17,10 +17,10 @@ class UserRepository(
     private val apiService: ApiService
 ) {
 
-    fun getUSer(): LiveData<PagingData<DataItem>> {
+    fun getUser(): LiveData<PagingData<DataItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 12
             ),
             pagingSourceFactory = {
                 UserPagingSource(apiService)

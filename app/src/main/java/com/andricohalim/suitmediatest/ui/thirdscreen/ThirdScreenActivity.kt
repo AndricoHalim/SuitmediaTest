@@ -3,6 +3,7 @@ package com.andricohalim.suitmediatest.ui.thirdscreen
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ class ThirdScreenActivity : AppCompatActivity() {
     private val thirdScreenViewModel by viewModels<ThirdScreenViewModel> {
         ViewModelFactory.getInstance(this)
     }
+    private lateinit var adapter: UserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityThirdScreenBinding.inflate(layoutInflater)
@@ -27,23 +29,30 @@ class ThirdScreenActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Third Screen"
 
+        adapter = UserAdapter()
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
 
         setupAction()
 
+        binding.swiperefresh.setOnRefreshListener {
+            adapter.refresh()
+            Toast.makeText(this, "User Refresh", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupAction() {
-        val adapter = UserAdapter()
-        binding.rvUser.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
+        binding.apply {
+            binding.rvUser.adapter = adapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    adapter.retry()
+                }
+            )
+            thirdScreenViewModel.listUser.observe(this@ThirdScreenActivity) {
+                adapter.submitData(lifecycle, it)
+                swiperefresh.isRefreshing = false
             }
-        )
-        thirdScreenViewModel.listUser.observe(this) {
-            adapter.submitData(lifecycle, it)
         }
     }
 

@@ -39,6 +39,7 @@ class UserAdapter :
                 loadImage(root.context, user.avatar, ivUser)
                 tvFirstName.text = user.firstName
                 tvLastName.text = user.lastName
+                tvEmail.text = user.email
             }
 
         }
