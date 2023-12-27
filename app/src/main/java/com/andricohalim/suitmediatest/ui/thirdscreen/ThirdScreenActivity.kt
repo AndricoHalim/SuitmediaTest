@@ -1,15 +1,19 @@
 package com.andricohalim.suitmediatest.ui.thirdscreen
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andricohalim.suitmediatest.R
 import com.andricohalim.suitmediatest.adapter.UserAdapter
 import com.andricohalim.suitmediatest.data.LoadingStateAdapter
 import com.andricohalim.suitmediatest.databinding.ActivityThirdScreenBinding
+import com.andricohalim.suitmediatest.ui.secondscreen.SecondScreenActivity
 import com.andricohalim.suitmediatest.utils.ViewModelFactory
 
 class ThirdScreenActivity : AppCompatActivity() {
@@ -31,6 +35,8 @@ class ThirdScreenActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.back)
         }
 
+        binding.tvError.isVisible = true
+
         adapter = UserAdapter()
 
         val layoutManager = LinearLayoutManager(this)
@@ -51,7 +57,19 @@ class ThirdScreenActivity : AppCompatActivity() {
                     adapter.retry()
                 }
             )
+            adapter.addLoadStateListener { loadState ->
+                if (loadState.append.endOfPaginationReached) {
+                    if (adapter.itemCount < 1) {
+                        tvError.isVisible = true
+                        rvUser.isVisible = false
+                    } else {
+                        tvError.isVisible = false
+                        rvUser.isVisible = true
+                    }
+                }
+            }
             thirdScreenViewModel.listUser.observe(this@ThirdScreenActivity) {
+                Log.d("MyApp", "Observing data: $it")
                 adapter.submitData(lifecycle, it)
                 swiperefresh.isRefreshing = false
                 tvError.isVisible = false

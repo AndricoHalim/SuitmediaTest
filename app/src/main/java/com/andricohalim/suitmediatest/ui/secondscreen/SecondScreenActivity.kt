@@ -52,6 +52,7 @@ class SecondScreenActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         binding.tvUser.text = intent.getStringExtra(USERNAME)

@@ -20,6 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             app:titleCentered="true"
             app:title="Second Screen"
+            android:fontFamily="@font/poppins"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/welcome"
+        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionBar" />
 
@@ -43,6 +45,7 @@
         android:layout_marginStart="16dp"
         android:textSize="24sp"
         android:text="User"
+        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
 
@@ -51,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/selected_user_name"
+        android:fontFamily="@font/poppins"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,6 +70,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/choose_a_user"
+        android:fontFamily="@font/poppins"
         android:backgroundTint="@color/green"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

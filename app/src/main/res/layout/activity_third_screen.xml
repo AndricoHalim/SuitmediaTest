@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.thirdscreen.ThirdScreenActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,6 +19,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            android:fontFamily="@font/poppins"
             android:layout_height="?attr/actionBarSize"
             app:titleCentered="true"
             app:title="Third Screen" />
@@ -56,7 +59,8 @@
         android:layout_height="wrap_content"
         android:text="@string/error"
         android:textSize="24sp"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:fontFamily="@font/poppins"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/swiperefresh"

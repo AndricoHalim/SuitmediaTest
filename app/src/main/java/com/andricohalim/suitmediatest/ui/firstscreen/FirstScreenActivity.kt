@@ -1,7 +1,10 @@
 package com.andricohalim.suitmediatest.ui.firstscreen
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -30,28 +33,36 @@ class FirstScreenActivity : AppCompatActivity() {
                     intent.putExtra(USERNAME, edName)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, "Please enter a name", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.name_can_t_be_empty), Toast.LENGTH_SHORT).show()
                 }
             }
             btnCheck.setOnClickListener {
                 val inputText = edPalindrome.text.toString()
-                val isPalindrome = isPalindrome(inputText)
-                if (isPalindrome) {
-                    AlertDialog.Builder(this@FirstScreenActivity).apply {
-                        setTitle(getString(R.string.is_palindrome))
-                        setMessage(getString(R.string.yes_it_s_palindrome))
-                        setPositiveButton(getString(R.string.ok)) { it, _ ->
-                            it.dismiss()
-                        }
-                    }.create().show()
-                } else{
-                    AlertDialog.Builder(this@FirstScreenActivity).apply {
-                        setTitle(getString(R.string.no_palindrome))
-                        setMessage(getString(R.string.no_it_s_not_palindrome))
-                        setPositiveButton(getString(R.string.ok)) { it, _ ->
-                            it.dismiss()
-                        }
-                    }.create().show()
+
+                if (inputText.isNotEmpty()) {
+                    val isPalindrome = isPalindrome(inputText)
+
+                    val customDialog = Dialog(this@FirstScreenActivity)
+                    customDialog.setContentView(R.layout.customdialog)
+
+                    val messageTextView = customDialog.findViewById<TextView>(R.id.tvDialogMessage)
+                    val okButton = customDialog.findViewById<Button>(R.id.btnOK)
+
+                    if (isPalindrome) {
+                        messageTextView.text = getString(R.string.yes_it_s_palindrome)
+                    } else {
+                        messageTextView.text = getString(R.string.no_it_s_not_palindrome)
+                    }
+
+                    okButton.setOnClickListener {
+                        customDialog.dismiss()
+                    }
+
+                    customDialog.show()
+                } else {
+                    Toast.makeText(this@FirstScreenActivity,
+                        getString(R.string.palindrome_cant_be_empty), Toast.LENGTH_SHORT).show()
                 }
             }
         }

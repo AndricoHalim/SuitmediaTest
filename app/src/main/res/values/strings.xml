@@ -18,4 +18,6 @@
     <string name="yes_it_s_palindrome">Yes, it\'s palindrome</string>
     <string name="no_it_s_not_palindrome">No, it\'s not palindrome</string>
     <string name="user_image">User Image</string>
+    <string name="name_can_t_be_empty">Name can\'t be empty</string>
+    <string name="palindrome_cant_be_empty">Palindrome cant be empty</string>
 </resources>
