@@ -33,9 +33,9 @@ class UserAdapter(private val listUser: List<DataItem>) :
                 tvEmail.text = user.email
 
                 root.setOnClickListener {
-//                    val detailIntent = Intent(binding.root.context, SecondScreenActivity::class.java)
-//                    detailIntent.putExtra(SecondScreenActivity.DETAIL_INFO, games)
-//                    itemView.context.startActivity(detailIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(itemView.context as Activity).toBundle())
+                    val detailIntent = Intent(binding.root.context, SecondScreenActivity::class.java)
+                    detailIntent.putExtra(SecondScreenActivity.USER_KEY, user)
+                    itemView.context.startActivity(detailIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(itemView.context as Activity).toBundle())
                 }
             }
 

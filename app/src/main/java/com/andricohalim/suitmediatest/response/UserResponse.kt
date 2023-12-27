@@ -1,6 +1,8 @@
 package com.andricohalim.suitmediatest.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class UserResponse(
 
@@ -32,6 +34,7 @@ data class Support(
 	val url: String
 )
 
+@Parcelize
 data class DataItem(
 
 	@field:SerializedName("last_name")
@@ -48,4 +51,4 @@ data class DataItem(
 
 	@field:SerializedName("email")
 	val email: String
-)
+) : Parcelable
