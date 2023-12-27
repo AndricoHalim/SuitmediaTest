@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.andricohalim.suitmediatest.injection.Injection
 import com.andricohalim.suitmediatest.repository.UserRepository
-import com.andricohalim.suitmediatest.ui.thirdscreen.ThirdScreenActivity
 import com.andricohalim.suitmediatest.ui.thirdscreen.ThirdScreenViewModel
 
 class ViewModelFactory private constructor(

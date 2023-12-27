@@ -1,17 +1,13 @@
 package com.andricohalim.suitmediatest.ui.secondscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.IntentCompat
 import com.andricohalim.suitmediatest.R
-import com.andricohalim.suitmediatest.databinding.ActivityFirstScreenBinding
 import com.andricohalim.suitmediatest.databinding.ActivitySecondScreenBinding
 import com.andricohalim.suitmediatest.response.DataItem
 import com.andricohalim.suitmediatest.ui.thirdscreen.ThirdScreenActivity
-import com.andricohalim.suitmediatest.utils.loadImage
 
 class SecondScreenActivity : AppCompatActivity() {
 
