@@ -14,7 +14,7 @@ import com.andricohalim.suitmediatest.response.DataItem
 import com.andricohalim.suitmediatest.ui.secondscreen.SecondScreenActivity
 import com.andricohalim.suitmediatest.utils.loadImage
 
-class UserAdapter :
+class UserAdapter:
     PagingDataAdapter<DataItem, UserAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,12 +27,16 @@ class UserAdapter :
         if (user != null) {
             holder.bind(user)
             holder.itemView.setOnClickListener {
-//                onUserItemClickListener.onUserItemClick(user)
+                val detailIntent = Intent(holder.binding.root.context, SecondScreenActivity::class.java)
+                detailIntent.putExtra(SecondScreenActivity.USER_KEY, user)
+                holder.binding.root.context.startActivity(
+                    detailIntent,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(holder.binding.root.context as Activity).toBundle())
             }
         }
     }
 
-    class ViewHolder(private val binding: UserItemBinding) :
+    class ViewHolder(val binding: UserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: DataItem) {
             binding.apply {

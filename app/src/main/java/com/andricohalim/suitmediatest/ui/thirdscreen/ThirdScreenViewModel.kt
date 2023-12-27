@@ -15,5 +15,11 @@ import kotlinx.coroutines.launch
 
 class ThirdScreenViewModel(private val repository: UserRepository) : ViewModel() {
 
+//    fun selectedUser(selectedUserName: String) {
+//        viewModelScope.launch {
+//            pref.selectedUser(selectedUserName)
+//        }
+//    }
+
     val listUser: LiveData<PagingData<DataItem>> = repository.getUser().cachedIn(viewModelScope)
 }

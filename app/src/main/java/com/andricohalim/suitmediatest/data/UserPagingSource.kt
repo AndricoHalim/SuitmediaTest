@@ -26,6 +26,7 @@ class UserPagingSource(private val apiService: ApiService) : PagingSource<Int, D
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)
+
         }
     }
 

@@ -11,4 +11,11 @@
     <string name="lastname">Lastname</string>
     <string name="email_email_com">email@email.com</string>
     <string name="firstname">Firstname</string>
+    <string name="selected_user_name">Selected User Name</string>
+    <string name="is_palindrome">Is Palindrome</string>
+    <string name="no_palindrome">Not Palindrome</string>
+    <string name="ok">OK</string>
+    <string name="yes_it_s_palindrome">Yes, it\'s palindrome</string>
+    <string name="no_it_s_not_palindrome">No, it\'s not palindrome</string>
+    <string name="user_image">User Image</string>
 </resources>

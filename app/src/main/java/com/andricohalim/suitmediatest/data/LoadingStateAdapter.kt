@@ -8,9 +8,13 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.andricohalim.suitmediatest.databinding.LoadingItemBinding
 
-class LoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
+class LoadingStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadingStateViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        loadState: LoadState
+    ): LoadingStateViewHolder {
         val binding = LoadingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LoadingStateViewHolder(binding, retry)
     }
@@ -27,12 +31,14 @@ class LoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Load
         }
 
         fun bind(loadState: LoadState) {
-            if (loadState is LoadState.Error) {
-                binding.errorMsg.text = loadState.error.localizedMessage
+            binding.apply {
+                if (loadState is LoadState.Error) {
+                    errorMsg.text = loadState.error.localizedMessage
+                }
+                progressBar.isVisible = loadState is LoadState.Loading
+                retryButton.isVisible = loadState is LoadState.Error
+                errorMsg.isVisible = loadState is LoadState.Error
             }
-            binding.progressBar.isVisible = loadState is LoadState.Loading
-            binding.retryButton.isVisible = loadState is LoadState.Error
-            binding.errorMsg.isVisible = loadState is LoadState.Error
         }
     }
 }

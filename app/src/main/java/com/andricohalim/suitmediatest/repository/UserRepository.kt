@@ -16,7 +16,6 @@ import java.lang.Exception
 class UserRepository(
     private val apiService: ApiService
 ) {
-
     fun getUser(): LiveData<PagingData<DataItem>> {
         return Pager(
             config = PagingConfig(

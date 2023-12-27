@@ -3,11 +3,16 @@ package com.andricohalim.suitmediatest.ui.thirdscreen
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
+import androidx.core.view.isVisible
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import com.andricohalim.suitmediatest.R
 import com.andricohalim.suitmediatest.adapter.UserAdapter
 import com.andricohalim.suitmediatest.data.LoadingStateAdapter
 import com.andricohalim.suitmediatest.utils.Result
@@ -27,7 +32,12 @@ class ThirdScreenActivity : AppCompatActivity() {
         binding = ActivityThirdScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Third Screen"
+        setSupportActionBar(binding.toolbar)
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.back)
+        }
 
         adapter = UserAdapter()
 
@@ -52,17 +62,18 @@ class ThirdScreenActivity : AppCompatActivity() {
             thirdScreenViewModel.listUser.observe(this@ThirdScreenActivity) {
                 adapter.submitData(lifecycle, it)
                 swiperefresh.isRefreshing = false
+                tvError.isVisible = false
             }
         }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.apply {
-            if (isLoading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-        }
+    fun customToolbar(title: String) {
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.customactionbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val customActionBarView = supportActionBar?.customView
+        val titleTextView = customActionBarView?.findViewById<TextView>(R.id.tvTitle)
+        titleTextView?.text = title
     }
 }
